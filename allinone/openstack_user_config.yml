@@ -1,0 +1,83 @@
+cidr_networks:
+  container: 172.29.236.0/22
+  storage: 172.29.244.0/22
+  tunnel: 172.29.240.0/22
+global_overrides:
+  external_lb_vip_address: 10.93.237.198
+  internal_lb_vip_address: 172.29.236.101
+  management_bridge: br-mgmt
+  no_containers: false
+  provider_networks:
+  - network:
+      container_bridge: br-mgmt
+      container_interface: eth1
+      container_type: veth
+      group_binds:
+      - all_containers
+      - hosts
+      ip_from_q: container
+      is_container_address: true
+      static_routes:
+      - cidr: 172.29.248.0/22
+        gateway: 172.29.236.100
+      type: raw
+  - network:
+      container_bridge: br-vxlan
+      container_interface: eth10
+      container_type: veth
+      group_binds:
+      - neutron_linuxbridge_agent
+      ip_from_q: tunnel
+      net_name: vxlan
+      range: 1:1000
+      type: vxlan
+  - network:
+      container_bridge: br-vlan
+      container_interface: eth12
+      container_type: veth
+      group_binds:
+      - neutron_linuxbridge_agent
+      host_bind_override: eth12
+      net_name: flat
+      type: flat
+  - network:
+      container_bridge: br-vlan
+      container_interface: eth11
+      container_type: veth
+      group_binds:
+      - neutron_linuxbridge_agent
+      net_name: vlan
+      range: 101:200,301:400
+      type: vlan
+  - network:
+      container_bridge: br-storage
+      container_interface: eth2
+      container_type: veth
+      group_binds:
+      - glance_api
+      - cinder_api
+      - cinder_volume
+      - nova_compute
+      - manila_share
+      - swift_proxy
+      ip_from_q: storage
+      type: raw
+identity_hosts:
+  aio1:
+    ip: 172.29.236.100
+repo-infra_hosts:
+  aio1:
+    ip: 172.29.236.100
+shared-infra_hosts:
+  aio1:
+    ip: 172.29.236.100
+used_ips:
+- 172.29.236.1,172.29.236.50
+- 172.29.236.100
+- 172.29.236.101
+- 172.29.240.1,172.29.240.50
+- 172.29.240.100
+- 172.29.244.1,172.29.244.50
+- 172.29.244.100
+- 172.29.248.1,172.29.248.50
+- 172.29.248.100
