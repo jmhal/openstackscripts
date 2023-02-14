@@ -31,16 +31,16 @@ network:
   bridges:
     br-cloud:
       addresses:
-      - 200.129.39.98/27
+      - XXX.XXX.XXX.XXX/XX
       routes:
       - to: default
-        via: 200.129.39.97  
+        via: XXX.XXX.XXX.XXX  
       nameservers:
         addresses:
-        - 200.129.38.133
+        - XXX.XXX.XXX.XXX
         - 8.8.8.8
         search:
-        - quixada.ufc.br
+        - XXX.XXX.XXX.XXX
       mtu: 1500
       interfaces:
       - cloud
