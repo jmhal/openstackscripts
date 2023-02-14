@@ -31,10 +31,10 @@ network:
   bridges:
     br-cloud:
       addresses:
-      - XXX.XXX.XXX.XXX/XX
+      - XXX.XXX.XXX.XX/XX
       routes:
       - to: default
-        via: XXX.XXX.XXX.XXX  
+        via: XXX.XXX.XXX.XX  
       nameservers:
         addresses:
         - XXX.XXX.XXX.XXX
