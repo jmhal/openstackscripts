@@ -1,0 +1,68 @@
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp2s0: {}
+  vlans:
+    cloud:
+      id: 1900
+      link: enp2s0
+      addresses: []
+    gerencia:
+      id: 1111
+      link: enp2s0
+      addresses:
+      - 192.168.1.150/24 
+    mgmt:
+      id: 1984
+      link: enp2s0
+      addresses: []
+    storage:
+      id: 1985
+      link: enp2s0
+      addresses: []
+    vxlan:
+      id: 1986
+      link: enp2s0
+      addresses: []
+    vlan:
+      id: 1987
+      link: enp2s0
+      addresses: []
+  bridges:
+    br-cloud:
+      addresses:
+      - 200.129.39.98/27
+      routes:
+      - to: default
+        via: 200.129.39.97  
+      nameservers:
+        addresses:
+        - 200.129.38.133
+        - 8.8.8.8
+        search:
+        - quixada.ufc.br
+      mtu: 1500
+      interfaces:
+      - cloud
+    br-mgmt:
+      addresses:  
+      - 172.29.236.11/22 
+      - 172.29.236.10/22 
+      mtu: 1500
+      interfaces:
+      - mgmt 
+    br-storage:
+      addresses: [ 172.29.240.11/22 ]
+      mtu: 1500
+      interfaces:
+      - storage
+    br-vxlan:
+      addresses: [ 172.29.244.11/22 ]
+      mtu: 1500
+      interfaces:
+      - vxlan
+    br-vlan:
+      mtu: 1500
+      interfaces:
+      - vlan
+  version: 2
